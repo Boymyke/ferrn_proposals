@@ -18,10 +18,14 @@ function openModal(item=null){
   modal.setAttribute('aria-hidden','false');
   setTimeout(()=>qs('#projectTitle').focus(),80);
 }
-function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+
+function closeModal(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+}
 
 function renderList(){
-  qs('#entryCount').textContent = `${items.length} ${items.length===1?'entry':'entries'} stored privately`;
+  qs('#entryCount').textContent = `${items.length} ${items.length===1?'entry':'entries'} in the archive`;
   if(!items.length){
     list.innerHTML = `<div class="empty-state" style="border:0;border-radius:0;min-height:260px"><div><h3>No archive entries yet.</h3><p>Add your websites and proposal links here.</p></div></div>`;
     return;
@@ -35,11 +39,10 @@ function renderList(){
 async function loadItems(){
   list.innerHTML = '<div style="height:260px" class="skeleton"></div>';
   try{
-    const data = await api('items');
+    const data = await api('admin-items');
     items = data.items || [];
     renderList();
   }catch(err){
-    if(err.status===401) return location.replace('/');
     list.innerHTML = `<div class="panel-body"><div class="status-note err">${escapeHTML(err.message)}</div></div>`;
   }
 }
@@ -52,13 +55,19 @@ qs('#refreshBtn').addEventListener('click',loadItems);
 
 document.addEventListener('click',async e=>{
   const edit = e.target.closest('[data-edit]');
-  if(edit){ const item=items.find(x=>x.id===edit.dataset.edit); if(item)openModal(item); }
+  if(edit){
+    const item=items.find(x=>x.id===edit.dataset.edit);
+    if(item) openModal(item);
+  }
   const del = e.target.closest('[data-delete]');
   if(del){
     const item=items.find(x=>x.id===del.dataset.delete);
     if(!item || !confirm(`Delete “${item.title}” from the archive?`)) return;
-    try{ await api('item',{method:'DELETE',body:JSON.stringify({id:item.id})}); showToast('Archive entry deleted.'); await loadItems(); }
-    catch(err){showToast(err.message)}
+    try{
+      await api('admin-item',{method:'DELETE',body:JSON.stringify({id:item.id})});
+      showToast('Archive entry deleted.');
+      await loadItems();
+    }catch(err){showToast(err.message)}
   }
 });
 
@@ -75,27 +84,20 @@ form.addEventListener('submit',async e=>{
     description:qs('#projectDescription').value.trim(),
     featured:qs('#projectFeatured').checked
   };
-  const btn=qs('#saveProjectBtn'); btn.disabled=true; btn.textContent='Saving…';
+  const btn=qs('#saveProjectBtn');
+  btn.disabled=true;
+  btn.textContent='Saving…';
   try{
-    await api('item',{method:'POST',body:JSON.stringify(payload)});
-    closeModal(); showToast(payload.id?'Work updated.':'Work added.'); await loadItems();
-  }catch(err){showToast(err.message)}finally{btn.disabled=false;btn.textContent='Save work'}
-});
-
-qs('#passwordForm').addEventListener('submit',async e=>{
-  e.preventDefault();
-  const status=qs('#passwordStatus');
-  const currentPassword=qs('#currentPassword').value;
-  const newPassword=qs('#newPassword').value;
-  const confirmPassword=qs('#confirmPassword').value;
-  status.className='status-note';
-  if(newPassword!==confirmPassword){status.textContent='New passwords do not match.';status.classList.add('err');return;}
-  try{
-    await api('password',{method:'POST',body:JSON.stringify({currentPassword,newPassword})});
-    status.textContent='Password updated. You will be asked to sign in again.';status.classList.add('ok');
-    e.target.reset();
-    setTimeout(()=>location.replace('/'),1300);
-  }catch(err){status.textContent=err.message;status.classList.add('err')}
+    await api('admin-item',{method:'POST',body:JSON.stringify(payload)});
+    closeModal();
+    showToast(payload.id?'Work updated.':'Work added.');
+    await loadItems();
+  }catch(err){
+    showToast(err.message);
+  }finally{
+    btn.disabled=false;
+    btn.textContent='Save work';
+  }
 });
 
 loadItems();
