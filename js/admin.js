@@ -1,18 +1,9 @@
+const adminSession = sessionStorage.getItem('ferrn_admin');
+if(adminSession !== '1') location.replace('/admin.html');
+
 const proposals = [
-  {
-    id: 'ataam-proposal',
-    title: 'Ataam Healthcare Proposal',
-    url: '/ataam-proposal.html',
-    category: 'Healthcare',
-    year: '2026'
-  },
-  {
-    id: 'awjai-proposal',
-    title: 'AWJAI Website Proposal',
-    url: '/awjai-proposal.html',
-    category: 'NGO',
-    year: '2026'
-  }
+  { id:'ataam-proposal', title:'Ataam Healthcare Proposal', url:'/ataam-proposal.html', category:'Healthcare', year:'2026' },
+  { id:'awjai-proposal', title:'AWJAI Website Proposal', url:'/awjai-proposal.html', category:'NGO', year:'2026' }
 ];
 
 const list = qs('#adminList');
@@ -29,4 +20,9 @@ function renderList(){
 }
 
 qs('#refreshBtn')?.addEventListener('click', renderList);
+qs('#adminLogoutBtn')?.addEventListener('click', () => {
+  sessionStorage.removeItem('ferrn_admin');
+  location.replace('/admin.html');
+});
+
 renderList();
