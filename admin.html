@@ -4,42 +4,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#050505" />
-  <title>Ferrn — Proposal Archive</title>
+  <title>Ferrn — Admin Login</title>
+  <meta name="description" content="Ferrn proposal admin access." />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="noise">
   <div class="cursor-glow" id="cursorGlow"></div>
-  <nav class="app-nav">
-    <div class="shell">
-      <div class="app-nav-left">
-        <a class="logo-link" href="admin.html"><img src="assets/ferrn-logo.jpg" alt="Ferrn logo"><span>FERRN</span></a>
-        <div class="nav-divider"></div><span class="nav-label">Proposal archive</span>
-      </div>
-    </div>
-  </nav>
+  <main class="login-page">
+    <nav class="login-nav shell">
+      <a class="brand-lockup" href="/" aria-label="Ferrn proposals">
+        <img class="brand-mark" src="assets/ferrn-logo.jpg" alt="Ferrn logo" />
+        <span class="brand-word">FERRN</span>
+      </a>
+      <div class="security-badge"><i></i><span>Admin access</span></div>
+    </nav>
 
-  <main class="admin-main shell">
-    <div class="admin-head">
-      <div>
-        <div class="kicker eyebrow">Admin workspace</div>
-        <h1>Your <span class="orange">proposals.</span></h1>
-        <p style="margin-top:12px;color:#888;max-width:620px;line-height:1.65">Open any proposal directly. No password or login is required on this admin page.</p>
+    <section class="login-main shell">
+      <div class="login-copy">
+        <div class="kicker eyebrow">Proposal administration</div>
+        <h1>Welcome back.<br><span class="orange">Admin access.</span></h1>
+        <p>Enter the admin password to open the Ferrn proposal archive dashboard.</p>
       </div>
-    </div>
 
-    <div class="admin-grid" style="grid-template-columns:1fr">
-      <section class="admin-panel">
-        <div class="panel-head">
-          <div><div class="panel-title">Proposal entries</div><div class="panel-sub" id="entryCount">Loading…</div></div>
-          <button class="small-btn" id="refreshBtn">Refresh</button>
+      <form class="login-card" id="loginForm" autocomplete="off" novalidate>
+        <div class="card-top">
+          <span class="card-index">ADMIN / 001</span>
+          <span class="mini-lock" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
         </div>
-        <div class="admin-list" id="adminList"></div>
-      </section>
-    </div>
-  </main>
+        <h2>Open admin.</h2>
+        <p class="subcopy">Enter your admin password to continue.</p>
+        <div class="password-wrap">
+          <input id="password" name="password" type="password" placeholder="Admin password" aria-label="Admin password" required autofocus />
+          <button class="eye-btn" type="button" id="togglePassword" aria-label="Show password">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+        </div>
+        <button class="primary-btn" id="accessBtn" type="submit"><span>Login to admin</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 7l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="error-msg" id="errorMsg" role="status" aria-live="polite"></div>
+      </form>
+    </section>
 
+    <footer class="login-foot shell">
+      <span>© Ferrn Agency</span>
+      <a href="/" style="color:inherit">Back to proposals</a>
+    </footer>
+  </main>
   <script src="js/shared.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
