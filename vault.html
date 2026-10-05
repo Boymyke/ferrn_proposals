@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#050505" />
-  <title>Ferrn — Work Archive</title>
+  <title>Ferrn — Proposal Admin</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -14,47 +14,36 @@
     <div class="shell">
       <div class="app-nav-left">
         <a class="logo-link" href="vault.html"><img src="assets/ferrn-logo.jpg" alt="Ferrn logo"><span>FERRN</span></a>
-        <div class="nav-divider"></div>
-        <span class="nav-label">Private work archive</span>
+        <div class="nav-divider"></div><span class="nav-label">Proposal admin</span>
       </div>
       <div class="app-nav-right">
-        <a class="ghost-btn" href="admin.html" aria-label="Manage archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 15.3a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6Z" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.55V21H10v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.52-1H3v-4h.08A1.7 1.7 0 0 0 4.6 8.97a1.7 1.7 0 0 0-.34-1.88l-.06-.06L7.03 4.2l.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 10 3.08V3h4v.08a1.7 1.7 0 0 0 1.03 1.52 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z" stroke="currentColor" stroke-width="1.2"/></svg><span>Manage</span></a>
-        <button class="icon-btn" id="logoutBtn" title="Log out" aria-label="Log out"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <a class="ghost-btn" href="/">View proposals</a>
+        <button class="ghost-btn" type="button" id="adminLogoutBtn">Log out</button>
       </div>
     </div>
   </nav>
 
-  <main>
-    <section class="vault-hero shell">
-      <div class="vault-hero-grid">
-        <div>
-          <div class="kicker eyebrow">Selected digital work</div>
-          <h1>Built with intent.<br><span class="orange">Presented with clarity.</span></h1>
-        </div>
-        <div class="vault-stats">
-          <div class="vault-stat"><strong id="websiteCount">—</strong><span>Websites</span></div>
-          <div class="vault-stat"><strong id="proposalCount">—</strong><span>Proposals</span></div>
-        </div>
+  <main class="admin-main shell">
+    <div class="admin-head">
+      <div>
+        <div class="kicker eyebrow">Admin workspace</div>
+        <h1>Your <span class="orange">proposals.</span></h1>
+        <p style="margin-top:12px;color:#888;max-width:620px;line-height:1.65">Open and review Ferrn proposal documents from one place.</p>
       </div>
-    </section>
+    </div>
 
-    <section class="shell">
-      <div class="toolbar">
-        <div class="tabs" role="tablist" aria-label="Filter archive">
-          <button class="tab active" data-filter="all">All work</button>
-          <button class="tab" data-filter="website">Websites</button>
-          <button class="tab" data-filter="proposal">Proposals</button>
+    <div class="admin-grid" style="grid-template-columns:1fr">
+      <section class="admin-panel">
+        <div class="panel-head">
+          <div><div class="panel-title">Proposal entries</div><div class="panel-sub" id="entryCount">Loading…</div></div>
+          <button class="small-btn" id="refreshBtn">Refresh</button>
         </div>
-        <div></div>
-        <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="searchInput" type="search" placeholder="Search archive" aria-label="Search archive"></div>
-      </div>
-      <div class="result-count" id="resultCount">Loading archive…</div>
-      <div style="height:14px"></div>
-      <div class="work-grid" id="workGrid" aria-live="polite"></div>
-    </section>
+        <div class="admin-list" id="adminList"></div>
+      </section>
+    </div>
   </main>
-  <div class="toast" id="toast"></div>
+
   <script src="js/shared.js"></script>
-  <script src="js/vault.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>
