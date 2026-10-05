@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#050505" />
-  <title>Ferrn — Archive Manager</title>
+  <title>Ferrn — Proposal Archive</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -14,48 +14,31 @@
     <div class="shell">
       <div class="app-nav-left">
         <a class="logo-link" href="admin.html"><img src="assets/ferrn-logo.jpg" alt="Ferrn logo"><span>FERRN</span></a>
-        <div class="nav-divider"></div><span class="nav-label">Archive manager</span>
-      </div>
-      <div class="app-nav-right">
-        <a class="ghost-btn" href="vault.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H6M11 7l-5 5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>View archive</span></a>
+        <div class="nav-divider"></div><span class="nav-label">Proposal archive</span>
       </div>
     </div>
   </nav>
 
   <main class="admin-main shell">
     <div class="admin-head">
-      <div><div class="kicker eyebrow">Admin workspace</div><h1>Manage the <span class="orange">archive.</span></h1></div>
-      <button class="small-btn brand" id="addProjectBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Add work</button>
+      <div>
+        <div class="kicker eyebrow">Admin workspace</div>
+        <h1>Your <span class="orange">proposals.</span></h1>
+        <p style="margin-top:12px;color:#888;max-width:620px;line-height:1.65">Open any proposal directly. No password or login is required on this admin page.</p>
+      </div>
     </div>
 
     <div class="admin-grid" style="grid-template-columns:1fr">
       <section class="admin-panel">
-        <div class="panel-head"><div><div class="panel-title">Archive entries</div><div class="panel-sub" id="entryCount">Loading…</div></div><button class="small-btn" id="refreshBtn">Refresh</button></div>
+        <div class="panel-head">
+          <div><div class="panel-title">Proposal entries</div><div class="panel-sub" id="entryCount">Loading…</div></div>
+          <button class="small-btn" id="refreshBtn">Refresh</button>
+        </div>
         <div class="admin-list" id="adminList"></div>
       </section>
     </div>
   </main>
 
-  <div class="modal-backdrop" id="projectModal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-head"><h2 id="modalTitle">Add work</h2><button class="icon-btn" id="closeModal" type="button" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
-      <form class="modal-body" id="projectForm">
-        <input type="hidden" id="projectId" />
-        <div class="field-grid">
-          <div class="field"><label for="projectType">Type</label><select id="projectType"><option value="website">Website</option><option value="proposal">Proposal</option></select></div>
-          <div class="field"><label for="projectYear">Year</label><input id="projectYear" type="number" min="2000" max="2100" placeholder="2026"></div>
-          <div class="field full"><label for="projectTitle">Project title</label><input id="projectTitle" type="text" required placeholder="e.g. AWJAI Website Redesign"></div>
-          <div class="field full"><label for="projectUrl">Live URL</label><input id="projectUrl" type="url" required placeholder="https://..."></div>
-          <div class="field"><label for="projectCategory">Category</label><input id="projectCategory" type="text" placeholder="NGO / SaaS / Brand"></div>
-          <div class="field"><label for="projectImage">Cover image URL</label><input id="projectImage" type="url" placeholder="https://..."></div>
-          <div class="field full"><label for="projectDescription">Short description</label><textarea id="projectDescription" placeholder="One concise line about the project and outcome."></textarea></div>
-          <div class="field full"><label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:10px;color:#aaa"><input id="projectFeatured" type="checkbox" style="width:15px;height:15px"> Feature this item with a larger card</label></div>
-        </div>
-        <div class="form-actions"><button class="small-btn" type="button" id="cancelModal">Cancel</button><button class="small-btn brand" type="submit" id="saveProjectBtn">Save work</button></div>
-      </form>
-    </div>
-  </div>
-  <div class="toast" id="toast"></div>
   <script src="js/shared.js"></script>
   <script src="js/admin.js"></script>
 </body>
