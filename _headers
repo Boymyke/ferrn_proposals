@@ -1,0 +1,5 @@
+/admin.html
+  Cache-Control: no-store
+
+/js/admin.js
+  Cache-Control: no-store
